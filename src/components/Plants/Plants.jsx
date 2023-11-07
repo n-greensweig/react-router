@@ -1,4 +1,8 @@
 import React from 'react';
+// ! useHistory works in child components of App.jsx, but not App,jsx itself
+// useHistory is available within any component 
+// that is a child of Router
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 let plants = [
   "https://gardeningsolutions.ifas.ufl.edu/mastergardener/outreach/plant_id/images/flowers/bird_paradise_flower.jpg",
@@ -9,9 +13,19 @@ let plants = [
 ]
 
 function Plants() {
+  
+  // Required for using history in a component
+  const history = useHistory();
+
+  const handleClick = (e) => {
+    // Navigate back home
+    history.push('/');
+  };
+
   return (
     <div>
       <h1>PLANTS</h1>
+      <button onClick={handleClick}>Go home</button><br></br>
       {plants.map((plant, i) => 
         <img 
           key={i}
